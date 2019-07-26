@@ -19,7 +19,7 @@
 }
 
 - (instancetype)initWithInputNode:(LOTAnimatorNode *)inputNode
-                                  shapeFill:(LOTShapeFill *)fill {
+                        shapeFill:(LOTShapeFill *)fill {
   self = [super initWithInputNode:inputNode keyName:fill.keyname];
   if (self) {
     colorInterpolator_ = [[LOTColorInterpolator alloc] initWithKeyframes:fill.color.keyframes];
@@ -46,10 +46,12 @@
 }
 
 - (void)performLocalUpdate {
-  centerPoint_DEBUG.backgroundColor =  [colorInterpolator_ colorForFrame:self.currentFrame];
+  UIColor *colorInterp = [UIColor colorWithCGColor:[colorInterpolator_ colorForFrame:self.currentFrame]];
+  centerPoint_DEBUG.backgroundColor = colorInterp.CGColor;
   centerPoint_DEBUG.borderColor = [UIColor lightGrayColor].CGColor;
   centerPoint_DEBUG.borderWidth = 2.f;
-  self.outputLayer.fillColor = [colorInterpolator_ colorForFrame:self.currentFrame];
+    
+  self.outputLayer.fillColor = colorInterp.CGColor;
   self.outputLayer.opacity = [opacityInterpolator_ floatValueForFrame:self.currentFrame];
 }
 
