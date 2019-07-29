@@ -46,12 +46,11 @@
 }
 
 - (void)performLocalUpdate {
-  UIColor *colorInterp = [UIColor colorWithCGColor:[colorInterpolator_ colorForFrame:self.currentFrame]];
-  centerPoint_DEBUG.backgroundColor = colorInterp.CGColor;
+  centerPoint_DEBUG.backgroundColor = [colorInterpolator_ colorForFrame:self.currentFrame];
   centerPoint_DEBUG.borderColor = [UIColor lightGrayColor].CGColor;
   centerPoint_DEBUG.borderWidth = 2.f;
     
-  self.outputLayer.fillColor = colorInterp.CGColor;
+  self.outputLayer.fillColor = [colorInterpolator_ colorForFrame:self.currentFrame];
   self.outputLayer.opacity = [opacityInterpolator_ floatValueForFrame:self.currentFrame];
 }
 
